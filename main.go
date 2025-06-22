@@ -36,10 +36,13 @@ func main() {
 			RemoteAddr: r.RemoteAddr,
 		}
 
-		log.Println(response)
-
 		w.Header().Set("Content-Type", "application/json")
-		json.NewEncoder(w).Encode(response)
+
+		result, _ := json.MarshalIndent(response, "", "  ")
+
+		log.Printf("%s\n\n", result)
+
+		w.Write(result)
 	})
 
 	port := ":8080"
